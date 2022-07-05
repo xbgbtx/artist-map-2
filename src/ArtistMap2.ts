@@ -1,6 +1,11 @@
 import { LitElement, html, css } from 'lit';
+import { property } from 'lit/decorators.js';
 
 export class ArtistMap2 extends LitElement {
+
+	@property()
+	state: string = "foo";
+	
 
   static styles = css`
     :host {
@@ -27,6 +32,7 @@ export class ArtistMap2 extends LitElement {
     return html`
       <main>
 				<h1>Artist Map</h1>
+				<p>Current state = ${this.state}</p>
       </main>
     `;
   }
