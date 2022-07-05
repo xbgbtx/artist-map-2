@@ -25,6 +25,7 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   plugins: [
     /** Fix for xstate */
     replace({
+      preventAssignment: true,
       'process.env.NODE_ENV': process.env.NODE_ENV,
     }),
   ],

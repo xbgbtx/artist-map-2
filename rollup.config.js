@@ -83,6 +83,7 @@ export default {
     }),
     /** Fix for xstate */
     replace({
+      preventAssignment: true,
       'process.env.NODE_ENV': process.env.NODE_ENV,
     }),
   ],
