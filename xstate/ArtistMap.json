@@ -1,0 +1,28 @@
+{
+  "id": "ArtistMap",
+  "initial": "Init",
+  "states": {
+    "Init": {
+      "on": {
+        "PageLoaded": {
+          "target": "FetchingWikiData"
+        }
+      }
+    },
+    "FetchingWikiData": {
+      "on": {
+        "WikiDataFetchComplete": {
+          "target": "BuildingMap"
+        }
+      }
+    },
+    "BuildingMap": {
+      "on": {
+        "MapBuildComplete": {
+          "target": "MapDisplay"
+        }
+      }
+    },
+    "MapDisplay": {}
+  }
+}

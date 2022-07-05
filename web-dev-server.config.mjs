@@ -26,6 +26,7 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
     /** Fix for xstate */
     replace({
       preventAssignment: true,
+      include: ['node_modules/xstate/**/*.js'],
       'process.env.NODE_ENV': process.env.NODE_ENV,
     }),
   ],
