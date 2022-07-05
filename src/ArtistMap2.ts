@@ -28,7 +28,8 @@ export class ArtistMap2 extends LitElement {
   render() {
     return html`
       <main>
+				<h1>Artist Map</h1>
       </main>
     `;
   }
-
+}
