@@ -2,6 +2,7 @@
 
 import { fromRollup } from '@web/dev-server-rollup';
 import rollupReplace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy';
 
 const replace = fromRollup(rollupReplace);
 
@@ -28,6 +29,9 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
       preventAssignment: true,
       include: ['node_modules/xstate/**/*.js'],
       'process.env.NODE_ENV': process.env.NODE_ENV,
+    }),
+    copy({
+      targets: [{ src: 'xstate', dest: 'dist' }],
     }),
   ],
 
