@@ -1,11 +1,11 @@
-import { createMachine } from 'xstate';
+/* import { createMachine } from 'xstate'; */
 import { ArtistMap2 } from './ArtistMap2.js';
 
-const response = await fetch('xstate/ArtistMap.json');
-const xstateData = await response.json();
+/* const response = await fetch('xstate/ArtistMap.json'); */
+/* const xstateData = await response.json(); */
 
-const appMachine = createMachine(xstateData);
+/* const appMachine = createMachine(xstateData); */
 
-console.log(appMachine);
+/* console.log(appMachine); */
 
 customElements.define('artist-map-2', ArtistMap2);
