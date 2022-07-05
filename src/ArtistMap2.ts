@@ -3,7 +3,6 @@ import { property } from 'lit/decorators.js';
 
 
 export class ArtistMap2 extends LitElement {
-  @property({ type: String }) title = 'My app';
 
   static styles = css`
     :host {
