@@ -31,4 +31,4 @@ export class ArtistMap2 extends LitElement {
       </main>
     `;
   }
-}
+
