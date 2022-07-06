@@ -9,6 +9,6 @@ const artistMapMachine = createMachine<ArtistMapContext>(
   {}
 );
 
-const artistMapService = interpret(artistMapMachine).start();
+const artistMapService = interpret(artistMapMachine);
 
 export { artistMapService };

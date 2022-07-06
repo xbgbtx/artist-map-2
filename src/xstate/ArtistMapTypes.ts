@@ -3,7 +3,6 @@ export namespace ArtistMapEvents {
     type: string;
   }
 
-  export interface PageLoaded {}
 }
 
 export interface ArtistMapContext {
