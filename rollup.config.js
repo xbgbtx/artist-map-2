@@ -6,7 +6,6 @@ import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 import replace from '@rollup/plugin-replace';
-import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'index.html',
@@ -87,9 +86,6 @@ export default {
       preventAssignment: true,
       include: ['node_modules/xstate/**/*.js'],
       'process.env.NODE_ENV': process.env.NODE_ENV,
-    }),
-    copy({
-      targets: [{ src: 'xstate', dest: 'dist' }],
     }),
   ],
 };
