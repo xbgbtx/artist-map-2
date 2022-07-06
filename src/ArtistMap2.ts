@@ -1,23 +1,5 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import { createMachine, interpret } from 'xstate';
-
-interface State {}
-
-interface Event {}
-
-async function startXstate () {
-  const response = await fetch('xstate/ArtistMap.json');
-  const xstateData = await response.json();
-  const machine = createMachine(xstateData);
-  interpret(machine).onTransition(
-    (state: State, e: Event) => {
-      console.log(state);
-      console.log(e);
-    }
-  );
-
-}
 
 export class ArtistMap2 extends LitElement {
 
@@ -45,11 +27,6 @@ export class ArtistMap2 extends LitElement {
     }
 
   `;
-
-  constructor() {
-    super();
-    setTimeout( () => startXstate(), 100 );
-  }
 
   render() {
     return html`
