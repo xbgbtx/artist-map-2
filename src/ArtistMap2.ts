@@ -1,6 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
+async function startXstate () {
+  const response = await fetch('xstate/ArtistMap.json');
+  const xstateData = await response.json();
+  console.log(xstateData);
+}
+
 export class ArtistMap2 extends LitElement {
 
 	@property()
@@ -27,6 +33,11 @@ export class ArtistMap2 extends LitElement {
     }
 
   `;
+
+  constructor() {
+    super();
+    setTimeout( () => startXstate(), 100 );
+  }
 
   render() {
     return html`
