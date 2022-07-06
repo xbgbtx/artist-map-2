@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
+import { artistMapService } from './xstate/ArtistMapMachine.js'
 
 export class ArtistMap2 extends LitElement {
 
