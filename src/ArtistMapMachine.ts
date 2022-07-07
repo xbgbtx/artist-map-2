@@ -4,7 +4,9 @@ import {
 } from './ArtistMapTypes.js'
 
 function initialContext() {
-  return {};
+  return {
+    artists : []
+  };
 }
 
 const artistMapMachine = createMachine<ArtistMapContext>(

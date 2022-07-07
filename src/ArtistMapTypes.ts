@@ -6,4 +6,5 @@ export namespace ArtistMapEvents {
 }
 
 export interface ArtistMapContext {
+  artists: Array<string>;
 }
