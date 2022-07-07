@@ -8,9 +8,9 @@ function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
 }
 
-export function dispatchMCEvent(e: ArtistMapEvents.BaseEvent) {
+export function dispatchAppEvent(e: ArtistMapEvents.BaseEvent) {
   window.dispatchEvent(
-    new CustomEvent('artist-map-event', {
+    new CustomEvent('app-event', {
       bubbles: true,
       composed: true,
       detail: e,
@@ -52,12 +52,19 @@ export class ArtistMap2 extends LitElement {
     );
 
     artistMapService.start();
+    window.addEventListener('app-event', forwardAppEvent);
   }
 
   render() {
+    const sendEvent = () => {
+      console.log("Sending event");
+      dispatchAppEvent({ type: 'PageLoaded' });
+    };
+
     return html`
       <main>
 				<h1>Artist Map</h1>
+        <button @click=${() => sendEvent()}>Click me</button>
       </main>
     `;
   }
