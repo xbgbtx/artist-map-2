@@ -17,11 +17,11 @@ const artistMapMachine = createMachine<ArtistMapContext>(
       init: {
         on: {
           PageLoaded: {
-            target: 'fetchingWikiData'
+            target: 'fetchingWikidata'
           }
         }
       },
-      fetchingWikiData: {
+      fetchingWikidata: {
       }
     }
   },

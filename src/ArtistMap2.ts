@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 import { artistMapService } from './xstate/ArtistMapMachine.js'
 import { ArtistMapEvents } from './xstate/ArtistMapTypes.js'
+import './WikidataFetch.js'
 
 function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
@@ -54,20 +55,30 @@ export class ArtistMap2 extends LitElement {
 
     artistMapService.start();
     window.addEventListener('app-event', forwardAppEvent);
+
+    setTimeout(()=>{
+      dispatchAppEvent({ type: 'PageLoaded' });
+    },0);
   }
 
   render() {
-    const sendEvent = () => {
-      console.log("Sending event");
-      dispatchAppEvent({ type: 'PageLoaded' });
-    };
-
     return html`
       <main>
 				<h1>Artist Map</h1>
+        ${this.renderCurrentState()}
         <p>State = ${this.appState}</p>
-        <button @click=${() => sendEvent()}>Click me</button>
       </main>
     `;
+  }
+
+  renderCurrentState() {
+    switch (this.appState) {
+      case 'init' : 
+        return  html`<p>Loading</p>`;
+      case 'fetchingWikidata' :
+        return html`<p>Fetching Data from Wikidata</p>`        
+      default:
+        return html`<p>An error has occurred please reload.</p>`
+    }
   }
 }
