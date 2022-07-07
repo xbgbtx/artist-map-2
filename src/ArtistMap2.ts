@@ -1,22 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import { artistMapService } from './xstate/ArtistMapMachine.js'
-import { ArtistMapEvents } from './xstate/ArtistMapTypes.js'
-import './WikidataFetch.js'
+import { artistMapService } from './ArtistMapMachine.js'
+import { dispatchAppEvent } from './logic/AppEvents.js'
 
 function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
 }
 
-export function dispatchAppEvent(e: ArtistMapEvents.BaseEvent) {
-  window.dispatchEvent(
-    new CustomEvent('app-event', {
-      bubbles: true,
-      composed: true,
-      detail: e,
-    })
-  );
-}
 export class ArtistMap2 extends LitElement {
 
   @property()
