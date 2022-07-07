@@ -2,11 +2,16 @@ import { createMachine, interpret } from 'xstate'
 import {
   ArtistMapContext,
 } from './ArtistMapTypes.js'
+import { getWikidata } from './logic/Wikidata.js'
 
 function initialContext() {
   return {
     artists : []
   };
+}
+
+async function wikidataDownload(ctx: ArtistMapContext) {
+  await getWikidata(ctx);
 }
 
 const artistMapMachine = createMachine<ArtistMapContext>(
@@ -19,15 +24,25 @@ const artistMapMachine = createMachine<ArtistMapContext>(
       init: {
         on: {
           PageLoaded: {
-            target: 'fetchingWikidata'
+            target: 'fetchingWikidata',
+            actions: 'wikidataDownload'
           }
         }
       },
       fetchingWikidata: {
+        on: {
+          WikidataFetchComplete : {
+            target: 'buildingMap'
+          }
+        }
+      },
+      buildingMap: {
       }
     }
   },
-  {}
+  {
+    actions: { wikidataDownload },
+  }
 );
 
 const artistMapService = interpret(artistMapMachine);
