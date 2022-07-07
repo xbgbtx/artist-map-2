@@ -1,8 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import { State } from 'xstate'
 import { artistMapService } from './xstate/ArtistMapMachine.js'
-import { ArtistMapEvents, ArtistMapContext } from './xstate/ArtistMapTypes.js'
+import { ArtistMapEvents } from './xstate/ArtistMapTypes.js'
 
 function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
@@ -19,6 +18,8 @@ export function dispatchAppEvent(e: ArtistMapEvents.BaseEvent) {
 }
 export class ArtistMap2 extends LitElement {
 
+  @property()
+  appState: string = "loading";
 
   static styles = css`
     :host {
@@ -45,9 +46,9 @@ export class ArtistMap2 extends LitElement {
     super();
 
     artistMapService.onTransition(
-      (ctx, e) => {
-        console.log(ctx);
-        console.log(e);
+      (newState) => {
+        const s = JSON.stringify(newState.value);
+        this.appState = s.replace(/"/g, '');
       }
     );
 
@@ -64,6 +65,7 @@ export class ArtistMap2 extends LitElement {
     return html`
       <main>
 				<h1>Artist Map</h1>
+        <p>State = ${this.appState}</p>
         <button @click=${() => sendEvent()}>Click me</button>
       </main>
     `;
