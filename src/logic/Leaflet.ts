@@ -5,7 +5,7 @@ import { ArtistMapContext } from '../ArtistMapTypes.js';
 const sleep = (milliseconds: number) =>
   new Promise(resolve => setTimeout(resolve, milliseconds));
 
-const {L} = window;
+const { L } = window;
 
 const attributionStr =
   '&copy; <a href="https://openstreetmap.org/copyright">' +
@@ -13,8 +13,8 @@ const attributionStr =
   '<a href="https://www.wikidata.org" >Wikidata</a> | ' +
   '<a href="https://github.com/xbgbtx/ArtistMap" >Source Code</a>';
 
-export function createMap() {
-  const map = L.map('mapdiv');
+export function createMap(mapDiv: HTMLElement) {
+  const map = L.map(mapDiv);
 
   // Add OpenStreetMap tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
