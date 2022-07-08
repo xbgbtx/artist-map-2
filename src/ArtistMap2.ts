@@ -1,17 +1,16 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import { artistMapService } from './ArtistMapMachine.js'
-import { dispatchAppEvent } from './logic/AppEvents.js'
-import './ui/LeafletMap.js'
+import { artistMapService } from './ArtistMapMachine.js';
+import { dispatchAppEvent } from './logic/AppEvents.js';
+import './ui/LeafletMap.js';
 
 function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
 }
 
 export class ArtistMap2 extends LitElement {
-
   @property()
-  appState: string = "loading";
+  appState: string = 'loading';
 
   static styles = css`
     :host {
@@ -31,31 +30,28 @@ export class ArtistMap2 extends LitElement {
     main {
       flex-grow: 1;
     }
-
   `;
 
   constructor() {
     super();
 
-    artistMapService.onTransition(
-      (newState) => {
-        const s = JSON.stringify(newState.value);
-        this.appState = s.replace(/"/g, '');
-      }
-    );
+    artistMapService.onTransition(newState => {
+      const s = JSON.stringify(newState.value);
+      this.appState = s.replace(/"/g, '');
+    });
 
     artistMapService.start();
     window.addEventListener('app-event', forwardAppEvent);
 
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatchAppEvent({ type: 'PageLoaded' });
-    },0);
+    }, 0);
   }
 
   render() {
     return html`
       <main>
-				<h1>Artist Map</h1>
+        <h1>Artist Map</h1>
 
         <am-leaflet-map></am-leaflet-map>
 
@@ -67,12 +63,12 @@ export class ArtistMap2 extends LitElement {
 
   renderCurrentState() {
     switch (this.appState) {
-      case 'init' : 
-        return  html`<p>Loading</p>`;
-      case 'fetchingWikidata' :
-        return html`<p>Fetching Data from Wikidata</p>`        
+      case 'init':
+        return html`<p>Loading</p>`;
+      case 'fetchingWikidata':
+        return html`<p>Fetching Data from Wikidata</p>`;
       default:
-        return html`<p>An error has occurred please reload.</p>`
+        return html`<p>An error has occurred please reload.</p>`;
     }
   }
 }
