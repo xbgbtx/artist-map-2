@@ -14,11 +14,12 @@
   },
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "@web/dev-server-rollup": "^0.3.18",
-    "lit": "^2.0.2",
-    "xstate": "^4.32.1",
     "@types/leaflet": "^1.7.11",
-    "leaflet": "^1.8.0"
+    "@web/dev-server-rollup": "^0.3.18",
+    "leaflet": "^1.8.0",
+    "lit": "^2.0.2",
+    "pettier": "^1.1.0",
+    "xstate": "^4.32.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
