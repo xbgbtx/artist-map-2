@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 import { artistMapService } from './ArtistMapMachine.js'
 import { dispatchAppEvent } from './logic/AppEvents.js'
+import './ui/LeafletMap.js'
 
 function forwardAppEvent(e: Event) {
   artistMapService.send((e as CustomEvent).detail);
@@ -55,6 +56,9 @@ export class ArtistMap2 extends LitElement {
     return html`
       <main>
 				<h1>Artist Map</h1>
+
+        <am-leaflet-map></am-leaflet-map>
+
         ${this.renderCurrentState()}
         <p>State = ${this.appState}</p>
       </main>
