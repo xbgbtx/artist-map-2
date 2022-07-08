@@ -3,15 +3,12 @@ import {
   ArtistMapContext,
 } from './ArtistMapTypes.js'
 import { getWikidata } from './logic/Wikidata.js'
+import { buildMap } from './logic/Leaflet.js'
 
 function initialContext() {
   return {
     artists : []
   };
-}
-
-async function wikidataDownload(ctx: ArtistMapContext) {
-  await getWikidata(ctx);
 }
 
 const artistMapMachine = createMachine<ArtistMapContext>(
@@ -25,11 +22,11 @@ const artistMapMachine = createMachine<ArtistMapContext>(
         on: {
           PageLoaded: {
             target: 'fetchingWikidata',
-            actions: 'wikidataDownload'
           }
         }
       },
       fetchingWikidata: {
+        entry: 'getWikidata',
         on: {
           WikidataFetchComplete : {
             target: 'buildingMap'
@@ -37,11 +34,19 @@ const artistMapMachine = createMachine<ArtistMapContext>(
         }
       },
       buildingMap: {
+        entry: 'buildMap',
+        on: {
+          MapBuildComplete: {
+            target: 'awaitingInput',
+          }
+        }
+      },
+      awaitingInput: {
       }
     }
   },
   {
-    actions: { wikidataDownload },
+    actions: { getWikidata, buildMap },
   }
 );
 
