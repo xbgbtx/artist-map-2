@@ -43,9 +43,9 @@ export class ArtistMap2 extends LitElement {
     artistMapService.start();
     window.addEventListener('app-event', forwardAppEvent);
 
-    setTimeout(() => {
+    this.updateComplete.then(() => {
       dispatchAppEvent({ type: 'PageLoaded' });
-    }, 0);
+    });
   }
 
   render() {
