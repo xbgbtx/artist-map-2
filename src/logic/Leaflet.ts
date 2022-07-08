@@ -14,7 +14,10 @@ const attributionStr =
   '<a href="https://github.com/xbgbtx/ArtistMap" >Source Code</a>';
 
 export function createMap(mapDiv: HTMLElement) {
-  const map = L.map(mapDiv);
+  const homeCoords: [number, number] = [0, 0];
+  const homeZoom = 2;
+
+  const map = L.map(mapDiv).setView(homeCoords, homeZoom);
 
   // Add OpenStreetMap tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
