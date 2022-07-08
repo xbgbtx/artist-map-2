@@ -2,14 +2,14 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 @customElement('am-leaflet-map')
-export class MemoryCatDealing extends LitElement {
+export class LeafletMap extends LitElement {
 
   static styles = css``;
 
   render() {
     return html`
       <main>
-        <p>(Map)</p>
+				<div id="mapdiv"></div>
       </main>
     `;
   }

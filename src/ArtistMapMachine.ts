@@ -3,7 +3,7 @@ import {
   ArtistMapContext,
 } from './ArtistMapTypes.js'
 import { getWikidata } from './logic/Wikidata.js'
-import { buildMap } from './logic/Leaflet.js'
+import { createMap, buildMap } from './logic/Leaflet.js'
 
 function initialContext() {
   return {
@@ -19,6 +19,7 @@ const artistMapMachine = createMachine<ArtistMapContext>(
 
     states: {
       init: {
+        entry: 'createMap',
         on: {
           PageLoaded: {
             target: 'fetchingWikidata',
@@ -46,7 +47,7 @@ const artistMapMachine = createMachine<ArtistMapContext>(
     }
   },
   {
-    actions: { getWikidata, buildMap },
+    actions: { getWikidata, createMap, buildMap },
   }
 );
 
