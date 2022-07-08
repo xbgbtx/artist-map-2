@@ -4,7 +4,12 @@ import { createMap } from '../logic/Leaflet.js';
 
 @customElement('am-leaflet-map')
 export class LeafletMap extends LitElement {
-  static styles = css``;
+  static styles = css`
+    #mapDiv {
+      width: 800px;
+      height: 600px;
+    }
+  `;
 
   constructor() {
     super();
@@ -18,6 +23,7 @@ export class LeafletMap extends LitElement {
 
   render() {
     return html`
+      <link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css" />
       <main>
         <div id="mapDiv"></div>
       </main>
