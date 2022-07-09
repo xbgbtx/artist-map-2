@@ -12,9 +12,6 @@ export class ArtistMap2 extends LitElement {
   @property()
   appState: string = 'loading';
 
-  @property()
-  context: string = '';
-
   static styles = css`
     :host {
       min-height: 100vh;
@@ -41,7 +38,6 @@ export class ArtistMap2 extends LitElement {
     artistMapService.onTransition(newState => {
       const s = JSON.stringify(newState.value);
       this.appState = s.replace(/"/g, '');
-      this.context = JSON.stringify(newState.context);
     });
 
     artistMapService.start();
@@ -61,7 +57,6 @@ export class ArtistMap2 extends LitElement {
 
         ${this.renderCurrentState()}
         <p>State = ${this.appState}</p>
-        <p>Context = ${this.context}</p>
       </main>
     `;
   }
