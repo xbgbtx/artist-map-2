@@ -5,7 +5,6 @@ import { dispatchAppEvent } from './logic/AppEvents.js';
 import './ui/LeafletMap.js';
 
 function forwardAppEvent(e: Event) {
-  console.log(e);
   artistMapService.send((e as CustomEvent).detail);
 }
 
