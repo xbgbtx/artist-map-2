@@ -1,5 +1,9 @@
-import { createMachine, interpret } from 'xstate';
-import { ArtistMapContext, initialContext } from './ArtistMapTypes.js';
+import { createMachine, interpret, assign } from 'xstate';
+import {
+  ArtistMapContext,
+  initialContext,
+  ArtistMapEvents,
+} from './ArtistMapTypes.js';
 import { getWikidata } from './logic/Wikidata.js';
 import { buildMap } from './logic/Leaflet.js';
 
@@ -19,8 +23,12 @@ const artistMapMachine = createMachine<ArtistMapContext>(
       },
       creatingMap: {
         on: {
-          MapCreated: {
+          MapDivCreated: {
             target: 'fetchingWikidata',
+            actions: assign({
+              mapDiv: (ctx: ArtistMapContext, e) =>
+                (e as unknown as ArtistMapEvents.MapDivCreated).mapDiv,
+            }),
           },
         },
       },

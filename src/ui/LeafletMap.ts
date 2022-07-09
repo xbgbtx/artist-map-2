@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { createMap } from '../logic/Leaflet.js';
+import { dispatchAppEvent } from '../logic/AppEvents.js';
 
 @customElement('am-leaflet-map')
 export class LeafletMap extends LitElement {
@@ -17,7 +17,11 @@ export class LeafletMap extends LitElement {
     this.updateComplete.then(() => {
       const mapDiv = this.shadowRoot?.getElementById('mapDiv');
 
-      if (mapDiv != null) createMap(mapDiv);
+      if (mapDiv != null) {
+        const type = 'MapDivCreated';
+        const e = { type, mapDiv };
+        dispatchAppEvent(e);
+      }
     });
   }
 

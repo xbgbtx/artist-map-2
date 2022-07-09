@@ -5,12 +5,16 @@ import { dispatchAppEvent } from './logic/AppEvents.js';
 import './ui/LeafletMap.js';
 
 function forwardAppEvent(e: Event) {
+  console.log(e);
   artistMapService.send((e as CustomEvent).detail);
 }
 
 export class ArtistMap2 extends LitElement {
   @property()
   appState: string = 'loading';
+
+  @property()
+  context: string = '';
 
   static styles = css`
     :host {
@@ -38,6 +42,7 @@ export class ArtistMap2 extends LitElement {
     artistMapService.onTransition(newState => {
       const s = JSON.stringify(newState.value);
       this.appState = s.replace(/"/g, '');
+      this.context = JSON.stringify(newState.context);
     });
 
     artistMapService.start();
@@ -57,6 +62,7 @@ export class ArtistMap2 extends LitElement {
 
         ${this.renderCurrentState()}
         <p>State = ${this.appState}</p>
+        <p>Context = ${this.context}</p>
       </main>
     `;
   }
