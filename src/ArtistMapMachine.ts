@@ -1,13 +1,7 @@
 import { createMachine, interpret } from 'xstate';
-import { ArtistMapContext } from './ArtistMapTypes.js';
+import { ArtistMapContext, initialContext } from './ArtistMapTypes.js';
 import { getWikidata } from './logic/Wikidata.js';
 import { buildMap } from './logic/Leaflet.js';
-
-function initialContext() {
-  return {
-    artists: [],
-  };
-}
 
 const artistMapMachine = createMachine<ArtistMapContext>(
   {
@@ -19,6 +13,13 @@ const artistMapMachine = createMachine<ArtistMapContext>(
       init: {
         on: {
           PageLoaded: {
+            target: 'creatingMap',
+          },
+        },
+      },
+      creatingMap: {
+        on: {
+          MapCreated: {
             target: 'fetchingWikidata',
           },
         },
