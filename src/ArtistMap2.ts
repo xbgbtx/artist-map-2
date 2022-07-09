@@ -38,6 +38,7 @@ export class ArtistMap2 extends LitElement {
     artistMapService.onTransition(newState => {
       const s = JSON.stringify(newState.value);
       this.appState = s.replace(/"/g, '');
+      console.log(newState);
     });
 
     artistMapService.start();

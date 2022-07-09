@@ -5,8 +5,12 @@ export namespace ArtistMapEvents {
     type: string;
   }
 
-  export interface MapDivCreated {
+  export interface MapDivCreated extends BaseEvent {
     mapDiv: HTMLElement;
+  }
+
+  export interface LeafletReady extends BaseEvent {
+    map: Map;
   }
 }
 

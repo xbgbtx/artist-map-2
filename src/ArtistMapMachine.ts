@@ -5,7 +5,7 @@ import {
   ArtistMapEvents,
 } from './ArtistMapTypes.js';
 import { getWikidata } from './logic/Wikidata.js';
-import { buildMap } from './logic/Leaflet.js';
+import { initLeaflet, buildMap } from './logic/Leaflet.js';
 
 const artistMapMachine = createMachine<ArtistMapContext>(
   {
@@ -17,17 +17,29 @@ const artistMapMachine = createMachine<ArtistMapContext>(
       init: {
         on: {
           PageLoaded: {
-            target: 'creatingMap',
+            target: 'creatingMapDiv',
           },
         },
       },
-      creatingMap: {
+      creatingMapDiv: {
         on: {
           MapDivCreated: {
-            target: 'fetchingWikidata',
+            target: 'initializingLeaflet',
             actions: assign({
               mapDiv: (ctx: ArtistMapContext, e) =>
                 (e as unknown as ArtistMapEvents.MapDivCreated).mapDiv,
+            }),
+          },
+        },
+      },
+      initializingLeaflet: {
+        entry: 'initLeaflet',
+        on: {
+          LeafletReady: {
+            target: 'fetchingWikidata',
+            actions: assign({
+              map: (ctx: ArtistMapContext, e) =>
+                (e as unknown as ArtistMapEvents.LeafletReady).map,
             }),
           },
         },
@@ -52,7 +64,7 @@ const artistMapMachine = createMachine<ArtistMapContext>(
     },
   },
   {
-    actions: { getWikidata, buildMap },
+    actions: { getWikidata, buildMap, initLeaflet },
   }
 );
 
