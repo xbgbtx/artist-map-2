@@ -1,5 +1,3 @@
-import 'leaflet';
-import 'leaflet-easybutton';
 import { ArtistMapEvents, ArtistMapContext } from '../ArtistMapTypes.js';
 import { dispatchAppEvent } from './AppEvents.js';
 
@@ -27,9 +25,9 @@ export function initLeaflet(ctx: ArtistMapContext) {
     noWrap: false,
   }).addTo(map);
 
-  L.easyButton('<img class="button_icon" src="assets/globe.svg">', () => {
-    map.flyTo(homeCoords, homeZoom);
-  }).addTo(map);
+  /* L.easyButton('<img class="button_icon" src="assets/globe.svg">', () => { */
+  /*   map.flyTo(homeCoords, homeZoom); */
+  /* }).addTo(map); */
 
   dispatchAppEvent({
     type: 'LeafletReady',
